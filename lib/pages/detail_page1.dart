@@ -11,7 +11,7 @@ class DetailPage1 extends StatelessWidget {
           _buildBackground(),
           _buildBackButton(context),
           _buildProfileIcon(context),
-          _buildBottomDraggbleSheet(context),
+          _buildBottomDraggableSheet(context),
           _bottomBanner(),
         ],
       ),
@@ -87,48 +87,107 @@ class DetailPage1 extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomDraggbleSheet(BuildContext context) {
-    return Positioned(
-      left: 8,
-      right: 8,
-      bottom: 95,
-      height: 380,
-      child: Column(
-        children: [
-          Expanded(
-            child: DraggableScrollableSheet(
-              initialChildSize: 0.7,
-              minChildSize: 0.5,
-              maxChildSize: 0.9,
-              builder: (context, scrollController) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(24),
-                      bottom: Radius.circular(24),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 10,
-                        spreadRadius: 3,
-                      ),
-                    ],
-                  ),
-                  child: ListView(
-                    controller: scrollController,
-                    padding: const EdgeInsets.all(16),
-                    children: const [],
-                  ),
-                );
-              },
-            ),
+
+Widget _buildBottomDraggableSheet(BuildContext context) {
+  return Positioned(
+    left: 8,
+    right: 8,
+    bottom: 95,
+    height: 390,
+    child: DraggableScrollableSheet(
+      snap: true,
+      initialChildSize: 0.5,
+      minChildSize: 0.5,
+      maxChildSize: 1.0,
+      builder: (context, scrollController) {
+        return Container(
+          decoration: BoxDecoration(
+            color: Colors.amber,
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 10,
+                spreadRadius: 3,
+              ),
+            ],
           ),
-        ],
-      ),
-    );
-  }
+          child: Column(
+            children: [
+              // 드래그 핸들
+              GestureDetector(
+                onPanUpdate: (details) {
+                  // 드래그 동작을 DraggableScrollableSheet에 전달
+                },
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: Center(
+                    child: Container(
+                      width: 40,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[400],
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              // 실제 콘텐츠 영역
+              Expanded(
+                child: ListView(
+                  controller: scrollController,
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  children: [
+                    // 여기에 실제 콘텐츠를 추가하세요
+                    Container(
+                      height: 100,
+                      margin: const EdgeInsets.only(bottom: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.7),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Center(
+                        child: Text('콘텐츠 영역 1'),
+                      ),
+                    ),
+                    Container(
+                      height: 100,
+                      margin: const EdgeInsets.only(bottom: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.7),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Center(
+                        child: Text('콘텐츠 영역 2'),
+                      ),
+                    ),
+                    Container(
+                      height: 100,
+                      margin: const EdgeInsets.only(bottom: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.7),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Center(
+                        child: Text('콘텐츠 영역 3'),
+                      ),
+                    ),
+                    // 더 많은 콘텐츠...
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    ),
+  );
+}
+
+
+
 
   Widget _bottomBanner() {
     return Positioned(
