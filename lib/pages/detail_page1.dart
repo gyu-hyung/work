@@ -41,7 +41,7 @@ class DetailPage1 extends StatelessWidget {
           _buildBackButton(context),
           _buildTopProfileIcon(context),
           _buildDraggableSheet(),
-          _bottomBanner(),
+          _buildBottomBanner(),
         ],
       ),
     );
@@ -142,12 +142,13 @@ class DetailPage1 extends StatelessWidget {
             ),
             child: ListView(
               controller: scrollController,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 0),
               children: [
                 _buildDragHandle(),
                 _buildProfileSection(),
                 _buildCounts(),
-                _buildButtons(),
+                // _buildButtons(),
+                _buildEmojiSection(),
               ],
             ),
           );
@@ -254,107 +255,101 @@ class DetailPage1 extends StatelessWidget {
 
 //버튼
   Widget _buildButtons() {
-    return Row(
-      children: [
-        Expanded(
-          flex: 4,
-          child: SizedBox(
-            height: 46,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF784FFF),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24),
-                ),
-                elevation: 0,
-                padding: EdgeInsets.zero,
-              ),
-              onPressed: () {},
-              child: const Text(
-                '버튼',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          flex: 2,
-          child: SizedBox(
-            height: 46,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFF6F6F6),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24),
-                ),
-                elevation: 0,
-                padding: EdgeInsets.zero,
-              ),
-              onPressed: () {},
-              child: const Text(
-                '버튼',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  /// 이모지 선택 위젯 (펼쳤을 때 보이는 부분)
-  Widget _buildEmojiSection() {
-    // 예시 이모지 리스트
-    final emojis = ['😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯'];
-
     return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
         children: [
-          const Divider(),
-          const SizedBox(height: 8),
-          const Text('Send a Reaction',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-          const SizedBox(height: 12),
-          GridView.builder(
-            shrinkWrap: true, // ListView 안에서 GridView가 자신의 콘텐츠 크기만큼만 차지하도록 설정
-            physics:
-                const NeverScrollableScrollPhysics(), // ListView의 스크롤과 충돌 방지
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4, // 한 줄에 4개씩
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
+          Expanded(
+            flex: 7,
+            child: SizedBox(
+              height: 46,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF784FFF),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                  elevation: 0,
+                  padding: EdgeInsets.zero,
+                ),
+                onPressed: () {},
+                child: const Text(
+                  '버튼',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
             ),
-            itemCount: emojis.length,
-            itemBuilder: (context, index) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(16),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            flex: 2,
+            child: SizedBox(
+              height: 46,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFF6F6F6),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                  elevation: 0,
+                  padding: EdgeInsets.zero,
                 ),
-                child: Center(
-                  child:
-                      Text(emojis[index], style: const TextStyle(fontSize: 24)),
+                onPressed: () {},
+                child: const Text(
+                  '버튼',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
-              );
-            },
+              ),
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _bottomBanner() {
+  /// 이모지 선택 위젯
+  Widget _buildEmojiSection() {
+    final emojis = [
+      '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
+      '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
+      '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
+      // '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
+      // '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
+      // '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
+    ];
+
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(24),
+      ),
+      child: GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 5,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+        ),
+        itemCount: emojis.length,
+        itemBuilder: (context, index) {
+          return Center(
+            child: Text(emojis[index], style: const TextStyle(fontSize: 44)),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildBottomBanner() {
     return Positioned(
       left: 0,
       right: 0,
