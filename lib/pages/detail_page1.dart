@@ -1,5 +1,34 @@
 import 'package:flutter/material.dart';
 
+class _IconText extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final bool primary;
+
+  const _IconText({
+    required this.icon,
+    required this.label,
+    this.primary = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final Color color =
+        primary ? const Color(0xFF784FFF) : const Color(0xFF212121);
+
+    return Row(
+      children: [
+        Icon(icon, size: 16, color: color),
+        const SizedBox(width: 4),
+        Text(
+          label,
+          style: TextStyle(fontSize: 12, color: color),
+        ),
+      ],
+    );
+  }
+}
+
 class DetailPage1 extends StatelessWidget {
   const DetailPage1({super.key});
 
@@ -127,83 +156,6 @@ class DetailPage1 extends StatelessWidget {
     );
   }
 
-  Widget _buildButtons() {
-    return Row(
-      children: [
-        Expanded(
-          flex: 4, // 왼쪽 버튼이 더 큼
-          child: SizedBox(
-            height: 46,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF784FFF),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24),
-                ),
-                elevation: 0,
-                padding: EdgeInsets.zero,
-              ),
-              onPressed: () {},
-              child: const Text(
-                '버튼',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          flex: 2, // 오른쪽 버튼 작게
-          child: SizedBox(
-            height: 46,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFF6F6F6),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24),
-                ),
-                elevation: 0,
-                padding: EdgeInsets.zero,
-              ),
-              onPressed: () {},
-              child: const Text(
-                '버튼',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  // 숫자 위젯
-  Widget _buildCounts() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        spacing: 16,
-        children: [
-          _IconText(
-              icon: Icons.thumb_up_alt_outlined,
-              label: '85421796',
-              primary: true),
-          _IconText(icon: Icons.mode_comment_outlined, label: '58932'),
-          _IconText(icon: Icons.remove_red_eye_outlined, label: '747865'),
-        ],
-      ),
-    );
-  }
-
   /// 상단 드래그 핸들 위젯
   Widget _buildDragHandle() {
     return Center(
@@ -281,6 +233,84 @@ class DetailPage1 extends StatelessWidget {
     );
   }
 
+  // 숫자 위젯
+  Widget _buildCounts() {
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        spacing: 16,
+        children: [
+          _IconText(
+              icon: Icons.thumb_up_alt_outlined,
+              label: '85421796',
+              primary: true),
+          _IconText(icon: Icons.mode_comment_outlined, label: '58932'),
+          _IconText(icon: Icons.remove_red_eye_outlined, label: '747865'),
+        ],
+      ),
+    );
+  }
+
+//버튼
+  Widget _buildButtons() {
+    return Row(
+      children: [
+        Expanded(
+          flex: 4,
+          child: SizedBox(
+            height: 46,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF784FFF),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                elevation: 0,
+                padding: EdgeInsets.zero,
+              ),
+              onPressed: () {},
+              child: const Text(
+                '버튼',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          flex: 2,
+          child: SizedBox(
+            height: 46,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFF6F6F6),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                elevation: 0,
+                padding: EdgeInsets.zero,
+              ),
+              onPressed: () {},
+              child: const Text(
+                '버튼',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   /// 이모지 선택 위젯 (펼쳤을 때 보이는 부분)
   Widget _buildEmojiSection() {
     // 예시 이모지 리스트
@@ -346,35 +376,6 @@ class DetailPage1 extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _IconText extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final bool primary;
-
-  const _IconText({
-    required this.icon,
-    required this.label,
-    this.primary = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final Color color =
-        primary ? const Color(0xFF784FFF) : const Color(0xFF212121);
-
-    return Row(
-      children: [
-        Icon(icon, size: 16, color: color),
-        const SizedBox(width: 4),
-        Text(
-          label,
-          style: TextStyle(fontSize: 12, color: color),
-        ),
-      ],
     );
   }
 }
