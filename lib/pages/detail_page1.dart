@@ -29,18 +29,31 @@ class _IconText extends StatelessWidget {
   }
 }
 
-class DetailPage1 extends StatelessWidget {
+class DetailPage1 extends StatefulWidget {
   const DetailPage1({super.key});
+
+  @override
+  State<DetailPage1> createState() => _DetailPage1State();
+}
+
+class _DetailPage1State extends State<DetailPage1> {
+  bool _emojiExpanded = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: [
-          _buildBackground(),
-          _buildBackButton(context),
-          _buildTopProfileIcon(context),
-          _buildDraggableSheet(),
+          Expanded(
+            child: Stack(
+              children: [
+                _buildBackground(),
+                _buildBackButton(context),
+                _buildTopProfileIcon(context),
+                _buildDraggableSheet(),
+              ],
+            ),
+          ),
           _buildBottomBanner(),
         ],
       ),
@@ -117,56 +130,50 @@ class DetailPage1 extends StatelessWidget {
   }
 
   Widget _buildDraggableSheet() {
-    return Positioned(
-      left: 8,
-      right: 8,
-      bottom: 95,
-      height: 340,
-      child: DraggableScrollableSheet(
-        snap: true,
-        initialChildSize: 0.5,
-        minChildSize: 0.5,
-        maxChildSize: 1.0,
-        builder: (context, scrollController) {
-          return Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(24),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 10,
-                  spreadRadius: 3,
-                ),
-              ],
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: AnimatedContainer(
+        clipBehavior: Clip.hardEdge,
+        margin: const EdgeInsets.all(10),
+        duration: const Duration(milliseconds: 300),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 10,
+              spreadRadius: 3,
             ),
-            child: ListView(
-              controller: scrollController,
-              padding: const EdgeInsets.symmetric(vertical: 0),
-              children: [
-                _buildDragHandle(),
-                _buildProfileSection(),
-                _buildCounts(),
-                // _buildButtons(),
-                _buildEmojiSection(),
-              ],
-            ),
-          );
-        },
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildDragHandle(),
+            _buildProfileSection(),
+            _buildCounts(),
+            // _buildButtons(),
+            _buildEmojiSection(),
+          ],
+        ),
       ),
     );
   }
 
   /// 상단 드래그 핸들 위젯
   Widget _buildDragHandle() {
-    return Center(
-      child: Container(
-        width: 40,
-        height: 5,
-        margin: const EdgeInsets.symmetric(vertical: 8),
-        decoration: BoxDecoration(
-          color: const Color(0xFFDDDDDD),
-          borderRadius: BorderRadius.circular(12),
+    return GestureDetector(
+      onTap: () => setState(() => _emojiExpanded = !_emojiExpanded),
+      child: Center(
+        child: Container(
+          width: 40,
+          height: 5,
+          margin: const EdgeInsets.symmetric(vertical: 8),
+          decoration: BoxDecoration(
+            color: const Color(0xFFDDDDDD),
+            borderRadius: BorderRadius.circular(12),
+          ),
         ),
       ),
     );
@@ -326,25 +333,37 @@ class DetailPage1 extends StatelessWidget {
       // '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
     ];
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(24),
+    return AnimatedCrossFade(
+      crossFadeState:
+          _emojiExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+      duration: const Duration(milliseconds: 300),
+      sizeCurve: Curves.easeInOutCirc,
+      firstChild: Container(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        child: _buildButtons(),
       ),
-      child: GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 5,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
+      secondChild: Container(
+        //그리드뷰 최대크기 지정
+        height: 190,
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(24),
         ),
-        itemCount: emojis.length,
-        itemBuilder: (context, index) {
-          return Center(
-            child: Text(emojis[index], style: const TextStyle(fontSize: 44)),
-          );
-        },
+        child: GridView.builder(
+          shrinkWrap: true,
+          padding: const EdgeInsets.fromLTRB(32.5, 21, 32.5, 17),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 5,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+          ),
+          itemCount: emojis.length,
+          itemBuilder: (context, index) {
+            return Center(
+              child: Text(emojis[index], style: const TextStyle(fontSize: 44)),
+            );
+          },
+        ),
       ),
     );
   }
