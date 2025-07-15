@@ -326,8 +326,9 @@ class _DetailPage1State extends State<DetailPage1> {
   Widget _buildEmojiSection() {
     final emojis = [
       '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
-      '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
-      '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
+      '😍', '😂',
+      //  '🥳', '🤩', '🤯', '😱', '🔥', '💯',
+      // '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
       // '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
       // '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
       // '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
@@ -344,25 +345,81 @@ class _DetailPage1State extends State<DetailPage1> {
       ),
       secondChild: Container(
         //그리드뷰 최대크기 지정
-        height: 190,
+        height: 240,
         decoration: BoxDecoration(
           color: Colors.grey[200],
           borderRadius: BorderRadius.circular(24),
         ),
-        child: GridView.builder(
-          shrinkWrap: true,
-          padding: const EdgeInsets.fromLTRB(32.5, 21, 32.5, 17),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 5,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-          ),
-          itemCount: emojis.length,
-          itemBuilder: (context, index) {
-            return Center(
-              child: Text(emojis[index], style: const TextStyle(fontSize: 44)),
-            );
-          },
+        child: Column(
+          children: [
+            GridView.builder(
+              shrinkWrap: true,
+              padding: const EdgeInsets.fromLTRB(32.5, 21, 32.5, 17),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 5,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+              ),
+              itemCount: emojis.length,
+              itemBuilder: (context, index) {
+                return Center(
+                  child:
+                      Text(emojis[index], style: const TextStyle(fontSize: 44)),
+                );
+              },
+            ),
+            _buildInputSection(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildInputSection() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Container(
+        height: 48,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(32),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            const SizedBox(width: 16),
+            const Expanded(
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: '',
+                  border: InputBorder.none,
+                  isDense: true,
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(right: 8),
+              width: 36,
+              height: 36,
+              decoration: const BoxDecoration(
+                color: Color(0xFF784FFF),
+                shape: BoxShape.circle,
+              ),
+              child: IconButton(
+                padding: EdgeInsets.zero,
+                icon: const Icon(Icons.send, color: Colors.white, size: 18),
+                onPressed: () {
+                  // 전송 기능 구현
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
