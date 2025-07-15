@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:practice01/pages/map/bloc/expanded_bloc.dart';
 
 class _IconText extends StatelessWidget {
   final IconData icon;
@@ -29,15 +31,20 @@ class _IconText extends StatelessWidget {
   }
 }
 
-class DetailPage1 extends StatefulWidget {
-  const DetailPage1({super.key});
+class MapMainPage extends StatelessWidget {
+  const MapMainPage({super.key});
 
   @override
-  State<DetailPage1> createState() => _DetailPage1State();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => EmojiBloc(),
+      child: const MapMainPageView(),
+    );
+  }
 }
 
-class _DetailPage1State extends State<DetailPage1> {
-  bool _emojiExpanded = false;
+class MapMainPageView extends StatelessWidget {
+  const MapMainPageView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +57,7 @@ class _DetailPage1State extends State<DetailPage1> {
                 _buildBackground(),
                 _buildBackButton(context),
                 _buildTopProfileIcon(context),
-                _buildDraggableSheet(),
+                _buildDraggableSheet(context),
               ],
             ),
           ),
@@ -129,7 +136,7 @@ class _DetailPage1State extends State<DetailPage1> {
     );
   }
 
-  Widget _buildDraggableSheet() {
+  Widget _buildDraggableSheet(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
       child: AnimatedContainer(
@@ -150,11 +157,11 @@ class _DetailPage1State extends State<DetailPage1> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _buildDragHandle(),
+            _buildDragHandle(context),
             _buildProfileSection(),
             _buildCounts(),
             // _buildButtons(),
-            _buildEmojiSection(),
+            _buildEmojiSection(context),
           ],
         ),
       ),
@@ -162,9 +169,11 @@ class _DetailPage1State extends State<DetailPage1> {
   }
 
   /// 상단 드래그 핸들 위젯
-  Widget _buildDragHandle() {
+  Widget _buildDragHandle(BuildContext context) {
+    final isExpanded = context.read<EmojiBloc>().add(ToggleEmoji());
+
     return GestureDetector(
-      onTap: () => setState(() => _emojiExpanded = !_emojiExpanded),
+      onTap: () => isExpanded,
       child: Center(
         child: Container(
           width: 40,
@@ -323,7 +332,7 @@ class _DetailPage1State extends State<DetailPage1> {
   }
 
   /// 이모지 선택 위젯
-  Widget _buildEmojiSection() {
+  Widget _buildEmojiSection(BuildContext context) {
     final emojis = [
       '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
       '😍', '😂',
@@ -333,10 +342,12 @@ class _DetailPage1State extends State<DetailPage1> {
       // '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
       // '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
     ];
+    final isExpanded =
+        context.select((EmojiBloc bloc) => bloc.state.isExpanded);
 
     return AnimatedCrossFade(
       crossFadeState:
-          _emojiExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+          isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
       duration: const Duration(milliseconds: 300),
       sizeCurve: Curves.easeInOutCirc,
       firstChild: Container(
