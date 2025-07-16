@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'map/map_main_page.dart';
-import 'detail_page2.dart';
-import 'detail_page3.dart';
+import '../teen_now/teen_now_page.dart';
+import '../teen_story/teen_story_page.dart';
+import '../detail_page3.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final pages = [
       {'title': '캐릭터 상세 화면 1', 'widget': const TeenNowPage()},
-      {'title': '캐릭터 상세 화면 2', 'widget': const DetailPage2()},
+      {'title': '캐릭터 상세 화면 2', 'widget': const TeenStoryPage()},
       {'title': '캐릭터 상세 화면 3', 'widget': const DetailPage3()},
     ];
 

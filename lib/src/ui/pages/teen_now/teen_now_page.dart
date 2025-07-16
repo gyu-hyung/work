@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:practice01/pages/map/bloc/expanded_bloc.dart';
+import 'package:practice01/src/ui/pages/teen_now/bloc/expanded_bloc.dart';
+import 'package:practice01/src/ui/widgets/hiteen_bottom_banner.dart';
 
 class _IconText extends StatelessWidget {
   final IconData icon;
@@ -61,7 +62,7 @@ class TeenNowPageView extends StatelessWidget {
               ],
             ),
           ),
-          _buildBottomBanner(),
+          const HiteenBottomBanner(),
         ],
       ),
     );
@@ -126,7 +127,7 @@ class TeenNowPageView extends StatelessWidget {
           child: Transform.scale(
             scale: 1.3,
             child: Image.asset(
-              'assets/icons/ic_marker.png',
+              'assets/images/ic_darcy_avartar2.png',
               fit: BoxFit.cover,
               alignment: Alignment.topCenter,
             ),
@@ -204,7 +205,7 @@ class TeenNowPageView extends StatelessWidget {
             child: Transform.scale(
               scale: 1.3,
               child: Image.asset(
-                'assets/icons/ic_darcy_avartar.png',
+                'assets/images/ic_darcy_avartar1.png',
                 fit: BoxFit.cover,
                 alignment: Alignment.topCenter,
               ),
@@ -430,25 +431,6 @@ class TeenNowPageView extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildBottomBanner() {
-    return Container(
-      height: 83,
-      width: double.infinity,
-      color: Colors.white,
-      child: Column(
-        children: [
-          SizedBox(
-            width: 350,
-            child: Image.asset(
-              'assets/banners/banner1.png',
-              fit: BoxFit.cover,
-            ),
-          ),
-        ],
       ),
     );
   }
