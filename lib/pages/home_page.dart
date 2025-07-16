@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pages = [
-      {'title': '캐릭터 상세 화면 1', 'widget': const MapMainPageView()},
+      {'title': '캐릭터 상세 화면 1', 'widget': const MapMainPage()},
       {'title': '캐릭터 상세 화면 2', 'widget': const DetailPage2()},
       {'title': '캐릭터 상세 화면 3', 'widget': const DetailPage3()},
     ];

@@ -168,12 +168,10 @@ class MapMainPageView extends StatelessWidget {
     );
   }
 
-  /// 상단 드래그 핸들 위젯
+  // 상단 드래그 핸들 위젯
   Widget _buildDragHandle(BuildContext context) {
-    final isExpanded = context.read<EmojiBloc>().add(ToggleEmoji());
-
     return GestureDetector(
-      onTap: () => isExpanded,
+      onTap: () => context.read<EmojiBloc>().add(ToggleEmoji()),
       child: Center(
         child: Container(
           width: 40,
@@ -331,7 +329,7 @@ class MapMainPageView extends StatelessWidget {
     );
   }
 
-  /// 이모지 선택 위젯
+  // 이모지 선택 위젯
   Widget _buildEmojiSection(BuildContext context) {
     final emojis = [
       '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
@@ -342,8 +340,8 @@ class MapMainPageView extends StatelessWidget {
       // '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
       // '😍', '😂', '🥳', '🤩', '🤯', '😱', '🔥', '💯',
     ];
-    final isExpanded =
-        context.select((EmojiBloc bloc) => bloc.state.isExpanded);
+
+    final isExpanded = context.watch<EmojiBloc>().state.isExpanded;
 
     return AnimatedCrossFade(
       crossFadeState:
@@ -437,26 +435,20 @@ class MapMainPageView extends StatelessWidget {
   }
 
   Widget _buildBottomBanner() {
-    return Positioned(
-      left: 0,
-      right: 0,
-      bottom: 0,
+    return Container(
       height: 83,
-      child: Container(
-        height: 59,
-        width: 350,
-        color: Colors.white,
-        child: Column(
-          children: [
-            SizedBox(
-              width: 350,
-              child: Image.asset(
-                'assets/banners/banner1.png',
-                fit: BoxFit.cover,
-              ),
-            )
-          ],
-        ),
+      width: double.infinity,
+      color: Colors.white,
+      child: Column(
+        children: [
+          SizedBox(
+            width: 350,
+            child: Image.asset(
+              'assets/banners/banner1.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+        ],
       ),
     );
   }
