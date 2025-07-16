@@ -31,20 +31,20 @@ class _IconText extends StatelessWidget {
   }
 }
 
-class MapMainPage extends StatelessWidget {
-  const MapMainPage({super.key});
+class TeenNowPage extends StatelessWidget {
+  const TeenNowPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => EmojiBloc(),
-      child: const MapMainPageView(),
+      child: const TeenNowPageView(),
     );
   }
 }
 
-class MapMainPageView extends StatelessWidget {
-  const MapMainPageView({super.key});
+class TeenNowPageView extends StatelessWidget {
+  const TeenNowPageView({super.key});
 
   @override
   Widget build(BuildContext context) {
