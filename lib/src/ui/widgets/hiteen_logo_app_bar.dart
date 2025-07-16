@@ -7,6 +7,7 @@ class HiteenLogoAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.white,
+      scrolledUnderElevation: 0,
       automaticallyImplyLeading: false,
       title: Image.asset(
         'assets/icons/hiteen_logo.png',

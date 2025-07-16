@@ -36,14 +36,6 @@ Widget _buildStoryList() {
   final storyUsers = [
     {'name': '윤서', 'avatar': 'assets/icons/ic_marker1.png'},
     {'name': '민지', 'avatar': 'assets/icons/ic_marker2.png'},
-    {'name': '지훈', 'avatar': 'assets/icons/ic_marker3.png'},
-    {'name': '수연', 'avatar': 'assets/icons/ic_marker4.png'},
-    {'name': '하늘', 'avatar': 'assets/icons/ic_marker5.png'},
-    {'name': '도윤', 'avatar': 'assets/icons/ic_marker6.png'},
-    {'name': '도윤', 'avatar': 'assets/icons/ic_marker1.png'},
-    {'name': '도윤', 'avatar': 'assets/icons/ic_marker2.png'},
-    {'name': '도윤', 'avatar': 'assets/icons/ic_marker3.png'},
-    {'name': '도윤', 'avatar': 'assets/icons/ic_marker4.png'},
   ];
 
   return Padding(
