@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:practice01/src/ui/pages/teen_now/bloc/expanded_bloc.dart';
 import 'package:practice01/src/ui/widgets/hiteen_bottom_banner.dart';
 
@@ -84,7 +85,7 @@ class TeenNowPageView extends StatelessWidget {
       top: 54,
       left: 16,
       child: GestureDetector(
-        onTap: () => Navigator.pop(context),
+        onTap: () => context.go('/'),
         child: Container(
           width: 44,
           height: 44,

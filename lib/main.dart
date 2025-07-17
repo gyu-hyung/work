@@ -1,21 +1,7 @@
 import 'package:flutter/material.dart';
-import 'src/ui/pages/home/home_page.dart';
+import 'app.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo UI',
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-      ),
-      home: const HomePage(),
-    );
-  }
+  final navigatorKey = GlobalKey<NavigatorState>();
+  runApp(HiteenApp(navigatorKey: navigatorKey));
 }

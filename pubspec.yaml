@@ -14,8 +14,11 @@ dependencies:
   flutter_bloc: ^9.1.1
 
   # Utility
+  json_annotation: ^4.9.0
   equatable: ^2.0.5
 
+  # Routing
+  go_router: ^15.1.2
 
 
   cupertino_icons: ^1.0.8

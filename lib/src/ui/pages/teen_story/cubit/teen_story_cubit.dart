@@ -48,6 +48,7 @@ class TeenStoryCubit extends Cubit<TeenStoryState> {
     await Future.delayed(const Duration(milliseconds: 2000));
     final dummyFeeds = [
       Feed(
+        userId: '12345',
         userName: "최윤서",
         userAvatar: "assets/images/ic_darcy_avartar1.png",
         images: [
@@ -61,6 +62,7 @@ class TeenStoryCubit extends Cubit<TeenStoryState> {
         views: 747865,
       ),
       Feed(
+        userId: '67890',
         userName: "이민지",
         userAvatar: "assets/images/ic_darcy_avartar2.png",
         images: [
@@ -74,6 +76,7 @@ class TeenStoryCubit extends Cubit<TeenStoryState> {
         views: 1,
       ),
     ];
+    if (isClosed) return;
     emit(state.copyWith(feeds: dummyFeeds, isFeedLoading: false));
   }
 
@@ -91,9 +94,7 @@ class TeenStoryCubit extends Cubit<TeenStoryState> {
       Story(name: "윤서8", avatar: "assets/icons/ic_marker2.png"),
       Story(name: "윤서9", avatar: "assets/icons/ic_marker3.png"),
     ];
-    emit(state.copyWith(
-      stories: dummyStories,
-      isStoryLoading: false,
-    ));
+    if (isClosed) return;
+    emit(state.copyWith(stories: dummyStories, isStoryLoading: false));
   }
 }

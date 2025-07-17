@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:practice01/src/data/models/feed.dart';
 
 class FeedItem extends StatefulWidget {
@@ -55,7 +56,7 @@ class _FeedItemState extends State<FeedItem> {
     );
   }
 
-  // 1. 프로필 헤더
+  // 1. 피드 헤더
   Widget _buildHeader(Feed feed) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -66,9 +67,14 @@ class _FeedItemState extends State<FeedItem> {
             backgroundImage: AssetImage(feed.userAvatar),
           ),
           const SizedBox(width: 8),
-          Text(
-            feed.userName,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          GestureDetector(
+            onTap: () {
+              context.push('/teen_story/${feed.userId}'); // 예시: 파라미터 넘기기
+            },
+            child: Text(
+              feed.userName,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
           ),
           const Spacer(),
           Ink(
@@ -86,7 +92,7 @@ class _FeedItemState extends State<FeedItem> {
     );
   }
 
-  // 2. 슬라이더(이미지 + 3/5)
+  // 2. 이미지 슬라이더
   Widget _buildImageSlider(Feed feed) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),

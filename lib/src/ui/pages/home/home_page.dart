@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import '../teen_now/teen_now_page.dart';
-import '../teen_story/teen_story_page.dart';
-import '../detail_page3.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -9,9 +7,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pages = [
-      {'title': '캐릭터 상세 화면 1', 'widget': const TeenNowPage()},
-      {'title': '캐릭터 상세 화면 2', 'widget': const TeenStoryPage()},
-      {'title': '캐릭터 상세 화면 3', 'widget': const DetailPage3()},
+      {'title': '틴 나우', 'route': '/teen_now'},
+      {'title': '틴 스토리', 'route': '/teen_story'},
+      {'title': '캐릭터 상세 화면 3', 'route': '/detail3'},
     ];
 
     return Scaffold(
@@ -24,10 +22,7 @@ class HomePage extends StatelessWidget {
             title: Text(page['title'] as String),
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => page['widget'] as Widget),
-              );
+              context.push(page['route'] as String);
             },
           );
         },

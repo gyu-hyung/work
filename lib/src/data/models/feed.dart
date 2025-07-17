@@ -1,4 +1,6 @@
 class Feed {
+  // 유저 ID
+  final String userId;
   // 피드 작성자
   final String userName;
   // 피드 작성자 썸네일
@@ -17,6 +19,7 @@ class Feed {
   final int views;
 
   Feed({
+    required this.userId,
     required this.userName,
     required this.userAvatar,
     required this.images,
