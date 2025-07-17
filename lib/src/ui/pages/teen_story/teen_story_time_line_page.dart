@@ -114,33 +114,59 @@ class TeenStoryTimeLinePageView extends StatelessWidget {
     );
   }
 
-  // 2. 버튼 Row: flex로 2:2:1
+// 2. 버튼 Row: flex로 3:3:1
   Widget _buildButtonRow() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
-          Expanded(flex: 3, child: _roundedButton('버튼')),
+          Expanded(
+            flex: 3,
+            child: _roundedElevatedButton('버튼', onPressed: () {
+              print('첫 번째 버튼 클릭');
+            }),
+          ),
           const SizedBox(width: 8),
-          Expanded(flex: 3, child: _roundedButton('버튼')),
+          Expanded(
+            flex: 3,
+            child: _roundedElevatedButton('버튼', onPressed: () {
+              print('두 번째 버튼 클릭');
+            }),
+          ),
           const SizedBox(width: 8),
-          Expanded(flex: 1, child: _roundedButton('버튼')),
+          Expanded(
+            flex: 1,
+            child: _roundedElevatedButton('버튼', onPressed: () {
+              print('세 번째 버튼 클릭');
+            }),
+          ),
         ],
       ),
     );
   }
 
-  Widget _roundedButton(String text) {
-    return Container(
+// ElevatedButton 커스텀 스타일
+  Widget _roundedElevatedButton(String text, {VoidCallback? onPressed}) {
+    return SizedBox(
       height: 40,
-      decoration: BoxDecoration(
-        color: const Color(0xFFF8F8F8),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      alignment: Alignment.center,
-      child: Text(
-        text,
-        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          elevation: 0,
+          backgroundColor: const Color(0xFFF8F8F8), // 기존 색상과 동일
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          padding: EdgeInsets.zero, // 내부 여백 최소화
+        ),
+        child: Text(
+          text,
+          style: const TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+          ),
+        ),
       ),
     );
   }
