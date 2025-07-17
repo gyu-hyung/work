@@ -45,7 +45,7 @@ class TeenStoryCubit extends Cubit<TeenStoryState> {
   Future<void> fetchFeeds() async {
     emit(state.copyWith(isFeedLoading: true));
     // 더미 데이터
-    await Future.delayed(const Duration(milliseconds: 2000));
+    await Future.delayed(const Duration(milliseconds: 300));
     final dummyFeeds = [
       Feed(
         userId: '12345',
@@ -82,7 +82,7 @@ class TeenStoryCubit extends Cubit<TeenStoryState> {
 
   Future<void> fetchStories() async {
     emit(state.copyWith(isStoryLoading: true));
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 300));
     final dummyStories = [
       Story(name: "윤서1", avatar: "assets/icons/ic_marker1.png"),
       Story(name: "윤서2", avatar: "assets/icons/ic_marker2.png"),

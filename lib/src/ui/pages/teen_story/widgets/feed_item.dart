@@ -199,7 +199,7 @@ class _FeedItemState extends State<FeedItem> {
           children: [
             for (int i = 0; i < reactionAvatars.length; i++)
               Positioned(
-                left: i * 24,
+                left: i * 18,
                 child: CircleAvatar(
                   radius: 16,
                   backgroundColor: Colors.white,
@@ -210,7 +210,7 @@ class _FeedItemState extends State<FeedItem> {
                 ),
               ),
             Positioned(
-              left: reactionAvatars.length * 24,
+              left: reactionAvatars.length * 18,
               child: const CircleAvatar(
                 radius: 16,
                 backgroundColor: Colors.black,
