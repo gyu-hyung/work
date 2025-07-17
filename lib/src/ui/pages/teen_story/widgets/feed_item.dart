@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:practice01/src/data/models/feed.dart';
 
 class FeedItem extends StatefulWidget {
-  const FeedItem({super.key});
+  final Feed feed;
+  // const FeedItem({super.key, required this.feed});
+  const FeedItem({super.key, required this.feed});
 
   @override
   State<FeedItem> createState() => _FeedItemState();
 }
 
 class _FeedItemState extends State<FeedItem> {
-  final PageController _pageController = PageController();
   int _currentPage = 0;
-
-  final List<String> feedImages = [
-    'assets/images/ic_darcy_avartar1.png',
-    'assets/images/ic_darcy_avartar2.png',
-  ];
+  late final PageController _pageController;
 
   final List<String> reactionAvatars = [
     'assets/icons/ic_marker1.png',
@@ -22,52 +20,74 @@ class _FeedItemState extends State<FeedItem> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final feed = widget.feed;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        buildHeader(),
+        _buildHeader(feed),
         const SizedBox(height: 12),
-        buildImageSlider(),
+        _buildImageSlider(feed),
         const SizedBox(height: 12),
-        buildPageIndicator(),
+        _buildPageIndicator(feed),
         const SizedBox(height: 12),
-        buildStatsRow(),
+        _buildStatsRow(feed),
         const SizedBox(height: 8),
-        buildReactionsRow(),
+        _buildReactionsRow(),
         const SizedBox(height: 8),
-        buildFeedText(),
+        _buildFeedText(feed),
         const SizedBox(height: 4),
-        buildTimestamp(),
+        _buildTimestamp(feed),
         const SizedBox(height: 32),
       ],
     );
   }
 
   // 1. 프로필 헤더
-  Widget buildHeader() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+  Widget _buildHeader(Feed feed) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         children: [
           CircleAvatar(
             radius: 20,
-            backgroundImage: AssetImage('assets/images/ic_darcy_avartar1.png'),
+            backgroundImage: AssetImage(feed.userAvatar),
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Text(
-            '최윤서',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            feed.userName,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
-          Spacer(),
-          Icon(Icons.more_vert),
+          const Spacer(),
+          Ink(
+            decoration: const ShapeDecoration(
+              color: Colors.white,
+              shape: CircleBorder(),
+            ),
+            child: IconButton(
+              icon: const Icon(Icons.more_vert),
+              onPressed: () {},
+            ),
+          ),
         ],
       ),
     );
   }
 
   // 2. 슬라이더(이미지 + 3/5)
-  Widget buildImageSlider() {
+  Widget _buildImageSlider(Feed feed) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: ClipRRect(
@@ -80,13 +100,13 @@ class _FeedItemState extends State<FeedItem> {
             children: [
               PageView.builder(
                 controller: _pageController,
-                itemCount: feedImages.length,
+                itemCount: feed.images.length,
                 onPageChanged: (index) {
                   setState(() => _currentPage = index);
                 },
                 itemBuilder: (context, index) {
                   return Image.asset(
-                    feedImages[index],
+                    feed.images[index],
                     fit: BoxFit.contain,
                     width: double.infinity,
                   );
@@ -104,7 +124,7 @@ class _FeedItemState extends State<FeedItem> {
                     borderRadius: BorderRadius.all(Radius.circular(16)),
                   ),
                   child: Text(
-                    '${_currentPage + 1} / ${feedImages.length}',
+                    '${_currentPage + 1} / ${feed.images.length}',
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
@@ -121,11 +141,11 @@ class _FeedItemState extends State<FeedItem> {
   }
 
   // 3. 도트 페이지 인디케이터
-  Widget buildPageIndicator() {
+  Widget _buildPageIndicator(Feed feed) {
     return Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(feedImages.length, (index) {
+        children: List.generate(feed.images.length, (index) {
           return Container(
             margin: const EdgeInsets.symmetric(horizontal: 4),
             width: 6,
@@ -142,29 +162,29 @@ class _FeedItemState extends State<FeedItem> {
   }
 
   // 4. 좋아요/댓글/조회수
-  Widget buildStatsRow() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+  Widget _buildStatsRow(Feed feed) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
-          Icon(Icons.thumb_up_alt_outlined, size: 20),
-          SizedBox(width: 4),
-          Text('85421796'),
-          SizedBox(width: 16),
-          Icon(Icons.chat_bubble_outline, size: 20),
-          SizedBox(width: 4),
-          Text('58932'),
-          SizedBox(width: 16),
-          Icon(Icons.remove_red_eye_outlined, size: 20),
-          SizedBox(width: 4),
-          Text('747865'),
+          const Icon(Icons.thumb_up_alt_outlined, size: 20),
+          const SizedBox(width: 4),
+          Text(feed.likes.toString()),
+          const SizedBox(width: 16),
+          const Icon(Icons.chat_bubble_outline, size: 20),
+          const SizedBox(width: 4),
+          Text(feed.comments.toString()),
+          const SizedBox(width: 16),
+          const Icon(Icons.remove_red_eye_outlined, size: 20),
+          const SizedBox(width: 4),
+          Text(feed.views.toString()),
         ],
       ),
     );
   }
 
   // 5. 리액션 원형 아바타
-  Widget buildReactionsRow() {
+  Widget _buildReactionsRow() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: SizedBox(
@@ -198,7 +218,7 @@ class _FeedItemState extends State<FeedItem> {
   }
 
   // 6. 피드 텍스트
-  Widget buildFeedText() {
+  Widget _buildFeedText(Feed feed) {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Text.rich(
@@ -219,7 +239,7 @@ class _FeedItemState extends State<FeedItem> {
   }
 
   // 7. 시간
-  Widget buildTimestamp() {
+  Widget _buildTimestamp(Feed feed) {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Text(
