@@ -173,6 +173,7 @@ class _FeedItemState extends State<FeedItem> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
+          const SizedBox(width: 4),
           const Icon(Icons.thumb_up_alt_outlined, size: 20),
           const SizedBox(width: 4),
           Text(feed.likes.toString()),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:practice01/src/ui/pages/detail_page3.dart';
+import 'package:practice01/src/ui/pages/teen_pick/teen_pick_page.dart';
 import 'package:practice01/src/ui/pages/home/home_page.dart';
 import 'package:practice01/src/ui/pages/teen_now/teen_now_page.dart';
 import 'package:practice01/src/ui/pages/teen_story/teen_story_page.dart';
@@ -30,8 +30,8 @@ List<RouteBase> routes(GlobalKey<NavigatorState> navigatorKey) {
       ],
     ),
     GoRoute(
-      path: '/detail3',
-      builder: (context, state) => const DetailPage3(),
+      path: '/teen_pick',
+      builder: (context, state) => const TeenPickPage(),
     ),
     // 여기서 계속 라우트 확장 가능!
   ];

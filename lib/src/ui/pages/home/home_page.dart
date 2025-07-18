@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
     final pages = [
       {'title': '틴 나우', 'route': '/teen_now'},
       {'title': '틴 스토리', 'route': '/teen_story'},
-      {'title': '캐릭터 상세 화면 3', 'route': '/detail3'},
+      {'title': '틴 픽', 'route': '/teen_pick'},
     ];
 
     return Scaffold(
