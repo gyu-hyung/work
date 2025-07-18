@@ -122,23 +122,17 @@ class TeenStoryTimeLinePageView extends StatelessWidget {
         children: [
           Expanded(
             flex: 3,
-            child: _roundedElevatedButton('버튼', onPressed: () {
-              print('첫 번째 버튼 클릭');
-            }),
+            child: _roundedElevatedButton('버튼', onPressed: () {}),
           ),
           const SizedBox(width: 8),
           Expanded(
             flex: 3,
-            child: _roundedElevatedButton('버튼', onPressed: () {
-              print('두 번째 버튼 클릭');
-            }),
+            child: _roundedElevatedButton('버튼', onPressed: () {}),
           ),
           const SizedBox(width: 8),
           Expanded(
             flex: 1,
-            child: _roundedElevatedButton('버튼', onPressed: () {
-              print('세 번째 버튼 클릭');
-            }),
+            child: _roundedElevatedButton('버튼', onPressed: () {}),
           ),
         ],
       ),

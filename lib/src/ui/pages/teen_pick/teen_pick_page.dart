@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:practice01/src/ui/pages/teen_pick/widgets/SwiperCard.dart';
+import 'package:practice01/src/ui/pages/teen_pick/widgets/swiper_card.dart';
 import 'package:practice01/src/ui/widgets/hiteen_bottom_banner.dart';
 import 'package:practice01/src/ui/widgets/hiteen_logo_app_bar.dart';
 

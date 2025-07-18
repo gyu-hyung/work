@@ -13,6 +13,7 @@ class _SwiperCardState extends State<SwiperCard> {
     const Color(0xFFFF3377), // 핑크
     const Color(0xFF784FFF), // 보라
     const Color(0xFF00D1FF), // 파랑
+    const Color.fromARGB(255, 0, 0, 0), // 검정
   ];
 
   int centerIndex = 1;
