@@ -5,6 +5,7 @@ import 'package:practice01/src/ui/pages/home/home_page.dart';
 import 'package:practice01/src/ui/pages/teen_now/teen_now_page.dart';
 import 'package:practice01/src/ui/pages/teen_story/teen_story_page.dart';
 import 'package:practice01/src/ui/pages/teen_story/teen_story_time_line_page.dart';
+import 'package:practice01/src/ui/pages/teenplay/teen_play_page.dart';
 
 List<RouteBase> routes(GlobalKey<NavigatorState> navigatorKey) {
   return [
@@ -33,6 +34,9 @@ List<RouteBase> routes(GlobalKey<NavigatorState> navigatorKey) {
       path: '/teen_pick',
       builder: (context, state) => const TeenPickPage(),
     ),
-    // 여기서 계속 라우트 확장 가능!
+    GoRoute(
+      path: '/teen_play',
+      builder: (context, state) => const TeenPlayPage(),
+    ),
   ];
 }
