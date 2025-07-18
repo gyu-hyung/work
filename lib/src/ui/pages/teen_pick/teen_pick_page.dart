@@ -118,6 +118,9 @@ class TeenPickPageView extends StatelessWidget {
       'assets/icons/ic_marker5.png',
       'assets/icons/ic_marker6.png',
     ];
+    final int lastAvartarIndex = reactionAvatars.length;
+    const double avartarSize = 20;
+    const double distance = 20;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 32),
@@ -145,25 +148,25 @@ class TeenPickPageView extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: SizedBox(
-                height: 36,
+                height: 40,
                 child: Stack(
                   children: [
-                    for (int i = 0; i < reactionAvatars.length; i++)
+                    for (int i = 0; i < lastAvartarIndex; i++)
                       Positioned(
-                        left: i * 18,
+                        left: i * distance,
                         child: CircleAvatar(
-                          radius: 16,
+                          radius: avartarSize,
                           backgroundColor: Colors.white,
                           child: CircleAvatar(
-                            radius: 14,
+                            radius: avartarSize - 2,
                             backgroundImage: AssetImage(reactionAvatars[i]),
                           ),
                         ),
                       ),
                     Positioned(
-                      left: reactionAvatars.length * 18,
+                      left: lastAvartarIndex * distance,
                       child: const CircleAvatar(
-                        radius: 16,
+                        radius: avartarSize,
                         backgroundColor: Colors.black,
                         child: Icon(Icons.chevron_right, color: Colors.white),
                       ),

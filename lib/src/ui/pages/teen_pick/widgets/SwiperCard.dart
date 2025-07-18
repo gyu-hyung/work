@@ -140,18 +140,54 @@ class CardWidget extends StatelessWidget {
         ],
       ),
     );
-    if (blur) {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(32),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 40, sigmaY: 40),
-          child: Opacity(
-            opacity: 1,
-            child: card,
-          ),
-        ),
-      );
-    }
-    return card;
+
+    if (!blur) return card;
+
+    // 1. 카드 전체에 blur
+    Widget blurred = ClipRRect(
+      borderRadius: BorderRadius.circular(32),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 40, sigmaY: 40),
+        child: card,
+      ),
+    );
+
+    // 2. 좌우 ShaderMask
+    Widget horizontalMask = ShaderMask(
+      shaderCallback: (Rect bounds) {
+        return const LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: [
+            Colors.transparent, // 왼쪽 투명
+            Colors.black, // 중앙 불투명
+            Colors.black, // 중앙 불투명
+            Colors.transparent // 오른쪽 투명
+          ],
+          stops: [0.0, 0.08, 0.92, 1.0],
+        ).createShader(bounds);
+      },
+      blendMode: BlendMode.dstIn,
+      child: blurred,
+    );
+
+    // 3. 위아래 ShaderMask
+    return ShaderMask(
+      shaderCallback: (Rect bounds) {
+        return const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.transparent, // 위쪽 투명
+            Colors.black, // 중앙 불투명
+            Colors.black, // 중앙 불투명
+            Colors.transparent // 아래쪽 투명
+          ],
+          stops: [0.0, 0.08, 0.92, 1.0],
+        ).createShader(bounds);
+      },
+      blendMode: BlendMode.dstIn,
+      child: horizontalMask,
+    );
   }
 }
