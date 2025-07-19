@@ -55,92 +55,98 @@ class TeenPlayPageView extends StatelessWidget {
   }
 
   Widget _buildChallengeItem() {
-    return Stack(
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
-          child: SizedBox(
-            width: 190,
-            height: 200,
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: const Color(0XFFF6F6F6),
-                borderRadius: BorderRadius.circular(28),
-              ),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 80,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Challenge',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontFamily: kDeBussyFont,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      const Text(
-                        'HITEEN',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: kDeBussyFont,
-                            color: Color(0Xff2121214d),
-                            fontWeight: FontWeight.w500),
-                      ),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              '64%',
-                              style: TextStyle(
-                                  fontSize: 24,
-                                  fontFamily: kDeBussyFont,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            SvgPicture.asset(
-                              'assets/icons/ic_heart.svg',
-                              width: 30,
-                            ),
-                          ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+            child: SizedBox(
+              width: 190,
+              height: 200,
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: const Color(0XFFF6F6F6),
+                  borderRadius: BorderRadius.circular(28),
+                ),
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 80,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Challenge',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontFamily: kDeBussyFont,
+                              fontWeight: FontWeight.w500),
                         ),
-                      )
-                    ],
+                        const Text(
+                          'HITEEN',
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontFamily: kDeBussyFont,
+                              color: Color(0Xff2121214d),
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                '64%',
+                                style: TextStyle(
+                                    fontSize: 24,
+                                    fontFamily: kDeBussyFont,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              SvgPicture.asset(
+                                'assets/icons/ic_heart.svg',
+                                width: 30,
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-        Positioned(
-          top: 16,
-          left: 25,
-          child: Image.asset(
-            'assets/images/ic_darcy_avartar1.png',
-            width: 139,
-          ),
-        )
-      ],
+          Positioned(
+            top: 16,
+            left: 25,
+            child: Image.asset(
+              'assets/images/ic_darcy_avartar1.png',
+              width: 139,
+            ),
+          )
+        ],
+      ),
     );
   }
 
   Widget _buildChallengeList() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: SizedBox(
+    return SizedBox(
         height: 300, // 카드 높이만큼 지정
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: [
+            const SizedBox(width: 20),
+            _buildChallengeItem(),
+            _buildChallengeItem(),
+            _buildChallengeItem(),
+            _buildChallengeItem(),
+            _buildChallengeItem(),
             _buildChallengeItem(),
           ],
         ),
-      ),
-    );
+      );
   }
 
   Widget _buildButtonRow() {
