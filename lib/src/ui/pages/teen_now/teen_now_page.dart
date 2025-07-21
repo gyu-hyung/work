@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:practice01/src/ui/pages/teen_now/bloc/expanded_bloc.dart';
 import 'package:practice01/src/ui/pages/teen_now/widgets/icon_text.dart';
 import 'package:practice01/src/ui/widgets/hiteen_bottom_banner.dart';
+import 'package:practice01/src/ui/widgets/hiteen_bottom_nav_bar.dart';
 
 class TeenNowPage extends StatelessWidget {
   const TeenNowPage({super.key});
@@ -29,9 +30,9 @@ class TeenNowPageView extends StatelessWidget {
             child: Stack(
               children: [
                 _buildBackground(),
-                _buildBackButton(context),
-                _buildTopProfileIcon(context),
-                _buildDraggableSheet(context),
+                _buildHiteenLogo(context),
+                // _buildDraggableSheet(context),
+                const HiteenBottomNavBar(),
               ],
             ),
           ),
@@ -52,7 +53,7 @@ class TeenNowPageView extends StatelessWidget {
     );
   }
 
-  Widget _buildBackButton(BuildContext context) {
+  Widget _buildHiteenLogo(BuildContext context) {
     return Positioned(
       top: 54,
       left: 16,
@@ -83,7 +84,7 @@ class TeenNowPageView extends StatelessWidget {
     );
   }
 
-  Widget _buildTopProfileIcon(BuildContext context) {
+  Widget _buildTopFloatProfileIcon(BuildContext context) {
     return Positioned(
       top: 54,
       right: 16,
