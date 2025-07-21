@@ -113,7 +113,7 @@ class TeenPlayPageView extends StatelessWidget {
                         'TITEEN',
                         style: TextStyle(
                             fontSize: 12,
-                            color: Color(0xff2121214d),
+                            color: Color(0xff212121),
                             fontFamily: kDeBussyFont),
                       ),
                     ],
@@ -180,7 +180,7 @@ class TeenPlayPageView extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 12,
                               fontFamily: kDeBussyFont,
-                              color: Color(0Xff2121214d),
+                              color: Color(0Xff212121),
                               fontWeight: FontWeight.w500),
                         ),
                         Expanded(

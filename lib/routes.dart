@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:practice01/src/ui/pages/dockbar/dock_bar_page.dart';
 import 'package:practice01/src/ui/pages/teen_pick/teen_pick_page.dart';
 import 'package:practice01/src/ui/pages/home/home_page.dart';
 import 'package:practice01/src/ui/pages/teen_now/teen_now_page.dart';
@@ -37,6 +38,10 @@ List<RouteBase> routes(GlobalKey<NavigatorState> navigatorKey) {
     GoRoute(
       path: '/teen_play',
       builder: (context, state) => const TeenPlayPage(),
+    ),
+    GoRoute(
+      path: '/dockbar',
+      builder: (context, state) => const DockBarPage(),
     ),
   ];
 }
