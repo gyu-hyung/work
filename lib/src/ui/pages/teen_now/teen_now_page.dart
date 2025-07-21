@@ -2,36 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:practice01/src/ui/pages/teen_now/bloc/expanded_bloc.dart';
+import 'package:practice01/src/ui/pages/teen_now/widgets/icon_text.dart';
 import 'package:practice01/src/ui/widgets/hiteen_bottom_banner.dart';
-
-class _IconText extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final bool primary;
-
-  const _IconText({
-    required this.icon,
-    required this.label,
-    this.primary = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final Color color =
-        primary ? const Color(0xFF784FFF) : const Color(0xFF212121);
-
-    return Row(
-      children: [
-        Icon(icon, size: 16, color: color),
-        const SizedBox(width: 4),
-        Text(
-          label,
-          style: TextStyle(fontSize: 12, color: color),
-        ),
-      ],
-    );
-  }
-}
 
 class TeenNowPage extends StatelessWidget {
   const TeenNowPage({super.key});
@@ -63,9 +35,9 @@ class TeenNowPageView extends StatelessWidget {
               ],
             ),
           ),
-          const HiteenBottomBanner(),
         ],
       ),
+      bottomNavigationBar: const HiteenBottomBanner(),
     );
   }
 
@@ -91,7 +63,7 @@ class TeenNowPageView extends StatelessWidget {
           height: 44,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(50),
             border: Border.all(
               color: const Color(0xFFD4D4D4),
               width: 0.5,
@@ -105,7 +77,7 @@ class TeenNowPageView extends StatelessWidget {
               ),
             ],
           ),
-          child: const Icon(Icons.arrow_back, color: Colors.black),
+          child: Image.asset('assets/icons/hiteen_logo2.png'),
         ),
       ),
     );
@@ -258,12 +230,21 @@ class TeenNowPageView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         spacing: 16,
         children: [
-          _IconText(
-              icon: Icons.thumb_up_alt_outlined,
-              label: '85421796',
-              primary: true),
-          _IconText(icon: Icons.mode_comment_outlined, label: '58932'),
-          _IconText(icon: Icons.remove_red_eye_outlined, label: '747865'),
+          IconText(
+            icon: Icons.thumb_up_alt_outlined,
+            label: '85421796',
+            primary: true,
+          ),
+          IconText(
+            icon: Icons.mode_comment_outlined,
+            label: '58932',
+            primary: false,
+          ),
+          IconText(
+            icon: Icons.remove_red_eye_outlined,
+            label: '747865',
+            primary: false,
+          ),
         ],
       ),
     );
@@ -394,11 +375,11 @@ class TeenNowPageView extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(32),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              // color: Colors.black.withOpacity(0.05),
               blurRadius: 4,
-              offset: const Offset(0, 2),
+              offset: Offset(0, 2),
             ),
           ],
         ),
