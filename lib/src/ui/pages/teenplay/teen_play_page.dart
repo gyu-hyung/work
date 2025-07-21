@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:practice01/constants.dart';
-import 'package:practice01/src/ui/pages/teen_story/cubit/teen_story_cubit.dart';
-import 'package:practice01/src/ui/pages/teen_story/widgets/feed_item.dart';
 import 'package:practice01/src/ui/widgets/hiteen_bottom_banner.dart';
 import 'package:practice01/src/ui/widgets/hiteen_logo_app_bar.dart';
 
@@ -32,25 +29,118 @@ class TeenPlayPageView extends StatelessWidget {
     final double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: const Color(0XffF6F6F6),
-      body: Container(
-        height: screenHeight * 0.55,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(32),
-            bottomRight: Radius.circular(32),
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Container(
+              height: screenHeight * 0.55,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(32),
+                  bottomRight: Radius.circular(32),
+                ),
+              ),
+              child: Column(
+                children: [
+                  _buildHiteenLogoAppBar(),
+                  _buildButtonRow(),
+                  _buildChallengeList(),
+                ],
+              ),
+            ),
           ),
-        ),
-        child: Column(
-          children: [
-            _buildHiteenLogoAppBar(),
-            _buildButtonRow(),
-            _buildChallengeList(),
-          ],
-        ),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                const Padding(
+                  // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                  padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
+                  child: Row(
+                    children: [
+                      Text(
+                        'LEVEL 2',
+                        style:
+                            TextStyle(fontSize: 20, fontFamily: kDeBussyFont),
+                      ),
+                    ],
+                  ),
+                ),
+                _buildChallengeRows('assets/images/avartar01.png'),
+                _buildChallengeRows('assets/images/avartar02.png'),
+                _buildChallengeRows('assets/images/avartar03.png'),
+                const SizedBox(
+                  height: 100,
+                )
+              ],
+            ),
+          )
+        ],
       ),
       bottomNavigationBar: _buildBottomBanner(),
+    );
+  }
+
+  Widget _buildChallengeRows(path) {
+    return Stack(
+      children: [
+        Padding(
+          // padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+          padding: const EdgeInsets.fromLTRB(20, 14, 20, 14),
+          child: SizedBox(
+            height: 80,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+              ),
+              child: const Row(
+                children: [
+                  SizedBox(
+                    width: 110,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Challenge',
+                        style:
+                            TextStyle(fontSize: 20, fontFamily: kDeBussyFont),
+                      ),
+                      Text(
+                        'TITEEN',
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Color(0xff2121214d),
+                            fontFamily: kDeBussyFont),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  Padding(
+                    padding: EdgeInsets.all(30),
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      color: Color(0xff212121),
+                      size: 20,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          top: 0,
+          left: 16,
+          child: Image.asset(
+            path,
+            width: 110,
+          ),
+        ),
+      ],
     );
   }
 
@@ -133,20 +223,20 @@ class TeenPlayPageView extends StatelessWidget {
 
   Widget _buildChallengeList() {
     return SizedBox(
-        height: 300, // 카드 높이만큼 지정
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [
-            const SizedBox(width: 20),
-            _buildChallengeItem(),
-            _buildChallengeItem(),
-            _buildChallengeItem(),
-            _buildChallengeItem(),
-            _buildChallengeItem(),
-            _buildChallengeItem(),
-          ],
-        ),
-      );
+      height: 300, // 카드 높이만큼 지정
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          const SizedBox(width: 20),
+          _buildChallengeItem(),
+          _buildChallengeItem(),
+          _buildChallengeItem(),
+          _buildChallengeItem(),
+          _buildChallengeItem(),
+          _buildChallengeItem(),
+        ],
+      ),
+    );
   }
 
   Widget _buildButtonRow() {
