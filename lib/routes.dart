@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:practice01/src/ui/pages/dockbar/dock_bar_page.dart';
+import 'package:practice01/src/ui/pages/teen_now/teen_now_page.dart';
+import 'package:practice01/src/ui/pages/teen_now/teen_now_page_bak.dart';
 import 'package:practice01/src/ui/pages/teen_pick/teen_pick_page.dart';
 import 'package:practice01/src/ui/pages/home/home_page.dart';
-import 'package:practice01/src/ui/pages/teen_now/teen_now_page.dart';
 import 'package:practice01/src/ui/pages/teen_story/teen_story_page.dart';
 import 'package:practice01/src/ui/pages/teen_story/teen_story_time_line_page.dart';
 import 'package:practice01/src/ui/pages/teenplay/teen_play_page.dart';
@@ -17,6 +17,10 @@ List<RouteBase> routes(GlobalKey<NavigatorState> navigatorKey) {
     GoRoute(
       path: '/teen_now',
       builder: (context, state) => const TeenNowPage(),
+    ),
+    GoRoute(
+      path: '/teen_now_back',
+      builder: (context, state) => const TeenNowPageBack(),
     ),
     GoRoute(
       path: '/teen_story',
@@ -38,10 +42,6 @@ List<RouteBase> routes(GlobalKey<NavigatorState> navigatorKey) {
     GoRoute(
       path: '/teen_play',
       builder: (context, state) => const TeenPlayPage(),
-    ),
-    GoRoute(
-      path: '/dockbar',
-      builder: (context, state) => const DockBarPage(),
     ),
   ];
 }
