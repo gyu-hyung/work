@@ -31,6 +31,7 @@ class TeenNowPageView extends StatelessWidget {
               children: [
                 _buildBackground(),
                 _buildHiteenLogo(context),
+                _buildTopFloatProfileIcon(context),
                 _buildDraggableSheet(context),
                 const HiteenBottomNavBar(),
               ],
@@ -69,12 +70,12 @@ class TeenNowPageView extends StatelessWidget {
               color: const Color(0xFFD4D4D4),
               width: 0.5,
             ),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black,
                 blurRadius: 8,
                 spreadRadius: 1,
-                offset: const Offset(0, 0),
+                offset: Offset(0, 0),
               ),
             ],
           ),
@@ -121,9 +122,9 @@ class TeenNowPageView extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(24),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black,
               blurRadius: 10,
               spreadRadius: 3,
             ),

@@ -23,7 +23,6 @@ class MyAppPageView extends StatefulWidget {
 }
 
 class _MyAppPageViewState extends State<MyAppPageView> {
-  final ValueNotifier<double> _sheetHeight = ValueNotifier(200.0);
   late ScrollController scrollController = ScrollController();
 
   SlidingUpPanelController panelController = SlidingUpPanelController();
@@ -138,22 +137,6 @@ class _MyAppPageViewState extends State<MyAppPageView> {
           },
           enableOnTap: false,
           //Enable the onTap callback for control bar.
-          dragDown: (details) {
-            print('dragDown');
-          },
-          dragStart: (details) {
-            print('dragStart');
-          },
-          dragCancel: () {
-            print('dragCancel');
-          },
-          dragUpdate: (details) {
-            print(
-                'dragUpdate,${panelController.status == SlidingUpPanelStatus.dragging ? 'dragging' : ''}');
-          },
-          dragEnd: (details) {
-            print('dragEnd');
-          },
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 15.0),
             decoration: const ShapeDecoration(

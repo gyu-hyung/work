@@ -13,14 +13,6 @@ class HiteenBottomNavBar extends StatefulWidget {
 class _HiteenBottomNavBarState extends State<HiteenBottomNavBar> {
   int _selectedIndex = 2;
 
-  final List<Widget> _pages = [
-    const Center(child: Text('틴스토리')),
-    const Center(child: Text('틴투표')),
-    const Center(child: Text('틴나우')),
-    const Center(child: Text('틴픽')),
-    const Center(child: Text('틴플레이')),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Align(
