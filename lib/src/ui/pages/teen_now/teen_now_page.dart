@@ -28,9 +28,10 @@ class TeenNowPageView extends StatefulWidget {
 }
 
 class _TeenNowPageViewState extends State<TeenNowPageView> {
-  late final ValueNotifier<double> _sheetHeight;
   late final SlidingUpPanelController panelController;
   late final ScrollController scrollController;
+  //floating buttons
+  late final ValueNotifier<double> _sheetHeight;
   final double panelOpenHeight = 440.0;
   final double panelCloseHeight = 150.0;
 
@@ -54,7 +55,6 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
     scrollController = ScrollController();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
-          print('initData');
           upperBound = 0.6;
           minBound = 0.2;
           anchor = 0.2;
@@ -332,7 +332,7 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
 
   Widget _buildFriendList() {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 63),
+      padding: const EdgeInsets.only(bottom: 188),
       child: ListView.separated(
         controller: scrollController,
         physics: const ClampingScrollPhysics(),
