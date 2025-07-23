@@ -28,19 +28,15 @@ class TeenNowPageView extends StatefulWidget {
 }
 
 class _TeenNowPageViewState extends State<TeenNowPageView> {
-  final ValueNotifier<double> _sheetHeight = ValueNotifier(160.0);
-
+  late final ValueNotifier<double> _sheetHeight;
   late final SlidingUpPanelController panelController;
   late final ScrollController scrollController;
-  final double panelHeightOpen = 470.0;
-  final double panelHeightClose = 160.0;
+  final double panelOpenHeight = 440.0;
+  final double panelCloseHeight = 150.0;
 
-  // double anchor = 0.3;
-  // double minBound = 0.3;
-  // double upperBound = 1.0;
-  final double anchor = 0.4;
-  final double minBound = 0;
-  final double upperBound = 1.0;
+  double anchor = 0.2;
+  double minBound = 0;
+  double upperBound = 1.0;
 
   @override
   void dispose() {
@@ -53,12 +49,16 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
   @override
   void initState() {
     super.initState();
+    _sheetHeight = ValueNotifier(0.0);
     panelController = SlidingUpPanelController();
-    // panelController =
-    //     SlidingUpPanelController(value: SlidingUpPanelStatus.hidden);
-    print(
-        '@@@@@@@ initState: panelController.status: ${panelController.status}');
     scrollController = ScrollController();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
+          print('initData');
+          upperBound = 0.6;
+          minBound = 0.2;
+          anchor = 0.2;
+        }));
   }
 
   @override
@@ -96,19 +96,12 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                    onPressed: panelController.expand,
-                    style: IconButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      shape: const CircleBorder(),
-                    ),
-                    icon: SvgPicture.asset('assets/icons/ic_float_1.svg')),
-                IconButton(
                     onPressed: panelController.collapse,
                     style: IconButton.styleFrom(
                       backgroundColor: Colors.white,
                       shape: const CircleBorder(),
                     ),
-                    icon: SvgPicture.asset('assets/icons/ic_float_2.svg')),
+                    icon: SvgPicture.asset('assets/icons/ic_float_1.svg')),
                 IconButton(
                     onPressed: panelController.hide,
                     style: IconButton.styleFrom(
@@ -181,13 +174,14 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
 
   Widget _buildBottomDragSheet() {
     return SlidingUpPanelWidget(
-      controlHeight: 10.1,
+      controlHeight: 10.0,
       enableOnTap: false,
       panelController: panelController,
       panelStatus: SlidingUpPanelStatus.hidden,
       anchor: anchor,
       minimumBound: minBound,
       upperBound: upperBound,
+      //드래그로 시트 hide
       dragEnd: (details) {
         final velocity = details.velocity.pixelsPerSecond.dy;
 
@@ -198,16 +192,13 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
         }
       },
       onStatusChanged: (details) => {
-        print(
-            'onStatusChanged: panelController.status: ${panelController.status}'),
         if (panelController.status != SlidingUpPanelStatus.dragging)
           {
             if (panelController.status == SlidingUpPanelStatus.expanded)
-              {_sheetHeight.value = panelHeightOpen}
-            else if (panelController.status == SlidingUpPanelStatus.anchored)
-              {_sheetHeight.value = panelHeightClose}
-            else if (panelController.status == SlidingUpPanelStatus.collapsed)
-              {_sheetHeight.value = panelHeightClose}
+              {_sheetHeight.value = panelOpenHeight}
+            else if (panelController.status == SlidingUpPanelStatus.anchored ||
+                panelController.status == SlidingUpPanelStatus.collapsed)
+              {_sheetHeight.value = panelCloseHeight}
             else
               {_sheetHeight.value = 0.0}
           }
@@ -238,7 +229,7 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
               builder: (context, value, child) {
                 return AnimatedCrossFade(
                   duration: const Duration(milliseconds: 150),
-                  crossFadeState: value > panelHeightClose
+                  crossFadeState: value > panelCloseHeight
                       ? CrossFadeState.showFirst
                       : CrossFadeState.showSecond,
                   firstChild: SizedBox(
