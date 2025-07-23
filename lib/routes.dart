@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:practice01/src/ui/pages/example/flutter_sliding_up_panel.dart';
 import 'package:practice01/src/ui/pages/teen_now/teen_now_page.dart';
 import 'package:practice01/src/ui/pages/teen_now/teen_now_page_bak.dart';
 import 'package:practice01/src/ui/pages/teen_pick/teen_pick_page.dart';
@@ -21,6 +22,10 @@ List<RouteBase> routes(GlobalKey<NavigatorState> navigatorKey) {
     GoRoute(
       path: '/teen_now_back',
       builder: (context, state) => const TeenNowPageBack(),
+    ),
+    GoRoute(
+      path: '/teen_now_example',
+      builder: (context, state) => const MyAppPage(),
     ),
     GoRoute(
       path: '/teen_story',

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
-import 'package:go_router/go_router.dart';
 import 'package:practice01/src/ui/pages/teen_now/bloc/expanded_bloc.dart';
-import 'package:practice01/src/ui/widgets/hiteen_bottom_banner.dart';
-import 'package:practice01/src/ui/widgets/hiteen_bottom_nav_bar.dart';
 
 class MyAppPage extends StatelessWidget {
   const MyAppPage({super.key});
@@ -37,17 +34,6 @@ class _MyAppPageViewState extends State<MyAppPageView> {
 
   @override
   void initState() {
-    scrollController.addListener(() {
-      if (scrollController.offset >=
-              scrollController.position.maxScrollExtent &&
-          !scrollController.position.outOfRange) {
-        panelController.expand();
-      } else if (scrollController.offset <=
-              scrollController.position.minScrollExtent &&
-          !scrollController.position.outOfRange) {
-        panelController.anchor();
-      } else {}
-    });
     super.initState();
   }
 
@@ -141,6 +127,7 @@ class _MyAppPageViewState extends State<MyAppPageView> {
           minimumBound: minBound,
           upperBound: upperBound,
           panelController: panelController,
+          panelStatus: SlidingUpPanelStatus.hidden,
           onTap: () {
             ///Customize the processing logic
             if (SlidingUpPanelStatus.expanded == panelController.status) {
