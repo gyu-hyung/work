@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:practice01/constants.dart';
+import 'package:practice01/src/ui/pages/teen_story/cubit/teen_story_cubit.dart';
+import 'package:practice01/src/ui/widgets/avartar_stack.dart';
 import 'package:practice01/src/ui/widgets/hiteen_bottom_banner.dart';
 import 'package:practice01/src/ui/widgets/hiteen_logo_app_bar.dart';
 
@@ -26,59 +29,82 @@ class TeenPlayPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: const Color(0XffF6F6F6),
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
             child: Container(
-              height: screenHeight * 0.55,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(32),
-                  bottomRight: Radius.circular(32),
-                ),
-              ),
+              color: Colors.white,
               child: Column(
                 children: [
                   _buildHiteenLogoAppBar(),
                   _buildButtonRow(),
                   _buildChallengeList(),
+                  _buildLevelWithAvatars(),
+                  _buildChallengeRows('assets/images/avartar01.png'),
+                  _buildChallengeRows('assets/images/avartar02.png'),
+                  _buildChallengeRows('assets/images/avartar03.png'),
+                  const SizedBox(
+                    height: 100,
+                  )
                 ],
               ),
             ),
           ),
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                const Padding(
-                  // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-                  padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
-                  child: Row(
-                    children: [
-                      Text(
-                        'LEVEL 2',
-                        style:
-                            TextStyle(fontSize: 20, fontFamily: kDeBussyFont),
-                      ),
-                    ],
-                  ),
-                ),
-                _buildChallengeRows('assets/images/avartar01.png'),
-                _buildChallengeRows('assets/images/avartar02.png'),
-                _buildChallengeRows('assets/images/avartar03.png'),
-                const SizedBox(
-                  height: 100,
-                )
-              ],
-            ),
-          )
         ],
       ),
       bottomNavigationBar: _buildBottomBanner(),
+    );
+  }
+
+  Widget _buildLevelWithAvatars() {
+    final List<String> reactionAvatars = [
+      'assets/icons/ic_marker1.png',
+      'assets/icons/ic_marker2.png',
+      'assets/icons/ic_marker3.png',
+      'assets/icons/ic_marker4.png',
+      'assets/icons/ic_marker5.png',
+    ];
+    const avatarSize = 20.0;
+    const distance = 20.0;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(25, 40, 20, 20),
+      child: Row(
+        children: [
+          const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '단어암기',
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: kPaperlogyFont),
+              ),
+              Text(
+                'LEVEL 2',
+                style: TextStyle(fontSize: 20, fontFamily: kDeBussyFont),
+              ),
+            ],
+          ),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: SizedBox(
+              width:
+                  (reactionAvatars.length + 2) * distance, // (아바타 수 + 마지막) * 간격
+              height: avatarSize * 2,
+              child: ReactionAvatarStack(
+                reactionAvatars: reactionAvatars,
+                avatarSize: avatarSize,
+                distance: distance,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -86,13 +112,12 @@ class TeenPlayPageView extends StatelessWidget {
     return Stack(
       children: [
         Padding(
-          // padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-          padding: const EdgeInsets.fromLTRB(20, 14, 20, 14),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
           child: SizedBox(
             height: 80,
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: const Color(0xffF6F6F6),
                 borderRadius: BorderRadius.circular(24),
               ),
               child: const Row(

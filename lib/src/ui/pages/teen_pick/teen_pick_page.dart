@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practice01/src/ui/pages/teen_pick/widgets/swiper_card.dart';
+import 'package:practice01/src/ui/widgets/avartar_stack.dart';
 import 'package:practice01/src/ui/widgets/hiteen_bottom_banner.dart';
 import 'package:practice01/src/ui/widgets/hiteen_logo_app_bar.dart';
 
@@ -118,9 +119,6 @@ class TeenPickPageView extends StatelessWidget {
       'assets/icons/ic_marker5.png',
       'assets/icons/ic_marker6.png',
     ];
-    final int lastAvartarIndex = reactionAvatars.length;
-    const double avartarSize = 20;
-    const double distance = 20;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 32),
@@ -147,32 +145,10 @@ class TeenPickPageView extends StatelessWidget {
             flex: 1,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SizedBox(
-                height: 40,
-                child: Stack(
-                  children: [
-                    for (int i = 0; i < lastAvartarIndex; i++)
-                      Positioned(
-                        left: i * distance,
-                        child: CircleAvatar(
-                          radius: avartarSize,
-                          backgroundColor: Colors.white,
-                          child: CircleAvatar(
-                            radius: avartarSize - 2,
-                            backgroundImage: AssetImage(reactionAvatars[i]),
-                          ),
-                        ),
-                      ),
-                    Positioned(
-                      left: lastAvartarIndex * distance,
-                      child: const CircleAvatar(
-                        radius: avartarSize,
-                        backgroundColor: Colors.black,
-                        child: Icon(Icons.chevron_right, color: Colors.white),
-                      ),
-                    ),
-                  ],
-                ),
+              child: ReactionAvatarStack(
+                reactionAvatars: reactionAvatars,
+                avatarSize: 20,
+                distance: 20,
               ),
             ),
           ),
