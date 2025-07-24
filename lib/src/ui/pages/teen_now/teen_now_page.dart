@@ -533,8 +533,4 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
       ),
     );
   }
-
-  Widget _buildFriendDetail() {
-    return Container();
-  }
 }

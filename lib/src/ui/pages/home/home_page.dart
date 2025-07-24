@@ -7,12 +7,13 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pages = [
+      {'title': '틴 스토리', 'route': '/teen_story'},
       {'title': '틴 나우', 'route': '/teen_now'},
+      {'title': '틴 플레이', 'route': '/teen_play'},
+      {'title': '--------------', 'route': '/'},
+      {'title': '틴 픽', 'route': '/teen_pick'},
       {'title': '틴 나우_bak', 'route': '/teen_now_back'},
       {'title': 'flutter sliding up panel', 'route': '/teen_now_example'},
-      {'title': '틴 스토리', 'route': '/teen_story'},
-      {'title': '틴 픽', 'route': '/teen_pick'},
-      {'title': '틴 플레이', 'route': '/teen_play'},
     ];
 
     return Scaffold(
