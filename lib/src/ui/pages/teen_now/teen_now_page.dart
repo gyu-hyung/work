@@ -70,7 +70,7 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
           Expanded(
             child: Stack(
               children: [
-                _buildBackground(),
+                _buildMapView(),
                 _buildFloatingLogo(context),
                 _buildFloatingButtons(),
                 _buildBottomDragSheet(),
@@ -84,13 +84,13 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
     );
   }
 
-  Widget _buildBackground() {
+  Widget _buildMapView() {
     const seoulCityHall = NLatLng(37.5666, 126.979);
+
     final safeAreaPadding = MediaQuery.paddingOf(context);
     return NaverMap(
       options: NaverMapViewOptions(
-        contentPadding:
-            safeAreaPadding, // 화면의 SafeArea에 중요 지도 요소가 들어가지 않도록 설정하는 Padding. 필요한 경우에만 사용하세요.
+        contentPadding: safeAreaPadding,
         initialCameraPosition:
             const NCameraPosition(target: seoulCityHall, zoom: 14),
       ),
