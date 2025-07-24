@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:practice01/constants.dart';
 import 'package:practice01/src/ui/pages/teen_now/bloc/expanded_bloc.dart';
 import 'package:practice01/src/ui/pages/teen_now/teen_now_bottom_sheet_page.dart';
 import 'package:practice01/src/ui/widgets/hiteen_bottom_banner.dart';
@@ -85,38 +85,57 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
   }
 
   Widget _buildBackground() {
-    return Container(
-      color: Colors.grey.shade300,
-      width: double.infinity,
-      height: double.infinity,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                    onPressed: panelController.collapse,
-                    style: IconButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      shape: const CircleBorder(),
-                    ),
-                    icon: SvgPicture.asset('assets/icons/ic_float_1.svg')),
-                IconButton(
-                    onPressed: panelController.hide,
-                    style: IconButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      shape: const CircleBorder(),
-                    ),
-                    icon: SvgPicture.asset('assets/icons/ic_float_3.svg')),
-              ],
-            ),
-            const Text('여기에 지도 및 캐릭터 UI 구성 예정'),
-          ],
-        ),
+    const seoulCityHall = NLatLng(37.5666, 126.979);
+    final safeAreaPadding = MediaQuery.paddingOf(context);
+    return NaverMap(
+      options: NaverMapViewOptions(
+        contentPadding:
+            safeAreaPadding, // 화면의 SafeArea에 중요 지도 요소가 들어가지 않도록 설정하는 Padding. 필요한 경우에만 사용하세요.
+        initialCameraPosition:
+            const NCameraPosition(target: seoulCityHall, zoom: 14),
       ),
+      onMapReady: (controller) {
+        final marker = NMarker(
+          id: "city_hall", // Required
+          position: seoulCityHall, // Required
+          caption: const NOverlayCaption(text: "서울시청"), // Optional
+        );
+        controller.addOverlay(marker); // 지도에 마커를 추가
+        print("naver map is ready!");
+      },
     );
+    // return Container(
+    //   color: Colors.grey.shade300,
+    //   width: double.infinity,
+    //   height: double.infinity,
+    //   child: Center(
+    //     child: Column(
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       children: [
+    //         Row(
+    //           mainAxisAlignment: MainAxisAlignment.center,
+    //           children: [
+    //             IconButton(
+    //                 onPressed: panelController.collapse,
+    //                 style: IconButton.styleFrom(
+    //                   backgroundColor: Colors.white,
+    //                   shape: const CircleBorder(),
+    //                 ),
+    //                 icon: SvgPicture.asset('assets/icons/ic_float_1.svg')),
+    //             IconButton(
+    //                 onPressed: panelController.hide,
+    //                 style: IconButton.styleFrom(
+    //                   backgroundColor: Colors.white,
+    //                   shape: const CircleBorder(),
+    //                 ),
+    //                 icon: SvgPicture.asset('assets/icons/ic_float_3.svg')),
+    //           ],
+    //         ),
+    //         const Text('여기에 지도 및 캐릭터 UI 구성 예정'),
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 
   Widget _buildFloatingLogo(BuildContext context) {
