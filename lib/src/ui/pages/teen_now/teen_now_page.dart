@@ -182,8 +182,8 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
       panelController: panelController,
       panelStatus: SlidingUpPanelStatus.hidden,
       anchor: anchor,
-      minimumBound: minBound,
       upperBound: upperBound,
+      minimumBound: minBound,
       dragEnd: (details) {
         final velocity = details.velocity.pixelsPerSecond.dy;
 
@@ -236,15 +236,15 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
                       : CrossFadeState.showSecond,
                   firstChild: _buildProfileSection(),
                   secondChild: SizedBox(
-                    height: 600,
-                    child: showFriendDetail
-                        ? _buildFriendDetail()
-                        : Column(
-                            children: [
-                              _buildCountWithAddFriends(),
-                              Expanded(child: _buildFriendList()),
-                            ],
-                          ),
+                    height: MediaQuery.of(context).size.height * 0.45,
+                    child: Column(
+                      children: [
+                        _buildCountWithAddFriends(),
+                        Expanded(
+                          child: _buildFriendList(),
+                        ),
+                      ],
+                    ),
                   ),
                   firstCurve: Curves.easeIn,
                   secondCurve: Curves.easeOut,
@@ -303,7 +303,7 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 24,
+                height: 20,
                 decoration: ShapeDecoration(
                   color: const Color(0xffF2F2F2),
                   shape: RoundedRectangleBorder(
@@ -311,11 +311,11 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
                   ),
                 ),
                 child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  padding: EdgeInsets.symmetric(horizontal: 8),
                   child: Center(
                     child: Text(
                       '😍 오늘도 맑음',
-                      style: TextStyle(fontSize: 12),
+                      style: TextStyle(fontSize: 10),
                     ),
                   ),
                 ),
@@ -324,11 +324,14 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
               const Text(
                 '강윤슬(눈물의달력)',
                 style: TextStyle(
-                    fontFamily: kPaperlogyFont, fontWeight: FontWeight.w500),
+                    fontSize: 12,
+                    fontFamily: kPaperlogyFont,
+                    fontWeight: FontWeight.w500),
               ),
               const Text(
                 '광주 북구 오룡동',
                 style: TextStyle(
+                    fontSize: 11,
                     fontFamily: kPaperlogyFont,
                     fontWeight: FontWeight.w400,
                     color: Color(0xff949494)),
@@ -336,23 +339,27 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
             ],
           ),
           const Spacer(),
-          OutlinedButton(
-            style: OutlinedButton.styleFrom(
-              backgroundColor: Colors.amber,
-              foregroundColor: Colors.black,
-              side: const BorderSide(color: Colors.black, width: 2),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14),
+          SizedBox(
+            width: 47,
+            height: 24,
+            child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                backgroundColor: Colors.amber,
+                foregroundColor: Colors.black,
+                side: const BorderSide(color: Colors.black, width: 2),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-            ),
-            onPressed: () {},
-            child: const Text(
-              '프로필',
-              style: TextStyle(
-                fontFamily: kPaperlogyFont,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
+              onPressed: () {},
+              child: const Text(
+                '프로필',
+                style: TextStyle(
+                  fontFamily: kPaperlogyFont,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
           )
@@ -437,23 +444,21 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
   }
 
   Widget _buildFriendList() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 188),
-      child: ListView.separated(
-        controller: scrollController,
-        physics: const ClampingScrollPhysics(),
-        itemBuilder: (context, index) {
-          return _buildFriendListItem();
-        },
-        separatorBuilder: (context, index) {
-          return const Divider(height: 0.5);
-        },
-        itemCount: 10,
-      ),
+    return ListView.separated(
+      padding: const EdgeInsets.only(bottom: 16),
+      controller: scrollController,
+      physics: const ClampingScrollPhysics(),
+      itemBuilder: (context, index) {
+        return _buildFriendListItem(index + 1);
+      },
+      separatorBuilder: (context, index) {
+        return const Divider(height: 0.5);
+      },
+      itemCount: 10,
     );
   }
 
-  Widget _buildFriendListItem() {
+  Widget _buildFriendListItem(index) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(22, 22, 22, 16),
       child: Row(
@@ -478,23 +483,23 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
             ),
           ),
           const SizedBox(width: 20),
-          const Column(
+          Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '강윤슬(눈물의달력) 🎉',
-                style: TextStyle(
+                '강윤슬(눈물의달력) 🎉 $index',
+                style: const TextStyle(
                     fontFamily: kPaperlogyFont, fontWeight: FontWeight.w500),
               ),
-              Text(
+              const Text(
                 '😍 오늘도 맑음',
                 style: TextStyle(
                     fontFamily: kPaperlogyFont,
                     fontWeight: FontWeight.w400,
                     color: Color(0xff949494)),
               ),
-              Text(
+              const Text(
                 '광주 북구 오룡동',
                 style: TextStyle(
                     fontFamily: kPaperlogyFont,
