@@ -72,6 +72,7 @@ class TeenPlayPageView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(25, 40, 20, 20),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,7 +90,6 @@ class TeenPlayPageView extends StatelessWidget {
               ),
             ],
           ),
-          const Spacer(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: SizedBox(
@@ -138,7 +138,7 @@ class TeenPlayPageView extends StatelessWidget {
                         'TITEEN',
                         style: TextStyle(
                             fontSize: 12,
-                            color: Color(0xff212121),
+                            color: Color(0xff2121214d),
                             fontFamily: kDeBussyFont),
                       ),
                     ],
