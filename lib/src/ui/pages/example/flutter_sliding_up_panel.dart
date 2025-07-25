@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
-import 'package:practice01/src/ui/pages/teen_now/bloc/expanded_bloc.dart';
+import 'package:practice01/src/ui/pages/example/bloc/expanded_bloc.dart';
 
 class MyAppPage extends StatelessWidget {
   const MyAppPage({super.key});

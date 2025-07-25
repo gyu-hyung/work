@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:practice01/src/ui/pages/example/flutter_sliding_up_panel.dart';
 import 'package:practice01/src/ui/pages/teen_now/teen_now_page.dart';
-import 'package:practice01/src/ui/pages/teen_now/teen_now_page_bak.dart';
+import 'package:practice01/src/ui/pages/example/teen_now_page_bak.dart';
 import 'package:practice01/src/ui/pages/teen_pick/teen_pick_page.dart';
 import 'package:practice01/src/ui/pages/home/home_page.dart';
 import 'package:practice01/src/ui/pages/teen_story/teen_story_page.dart';

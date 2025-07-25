@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:practice01/src/ui/pages/teen_now/bloc/expanded_bloc.dart';
-import 'package:practice01/src/ui/pages/teen_now/widgets/icon_text.dart';
+import 'package:practice01/src/ui/pages/example/bloc/expanded_bloc.dart';
+import 'package:practice01/src/ui/pages/example/widgets/icon_text.dart';
 import 'package:practice01/src/ui/widgets/hiteen_bottom_banner.dart';
 import 'package:practice01/src/ui/widgets/hiteen_bottom_nav_bar.dart';
 

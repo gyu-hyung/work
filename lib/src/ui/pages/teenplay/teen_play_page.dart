@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:practice01/constants.dart';
-import 'package:practice01/src/ui/pages/teen_story/cubit/teen_story_cubit.dart';
 import 'package:practice01/src/ui/widgets/avartar_stack.dart';
 import 'package:practice01/src/ui/widgets/hiteen_bottom_banner.dart';
 import 'package:practice01/src/ui/widgets/hiteen_logo_app_bar.dart';
@@ -138,7 +136,7 @@ class TeenPlayPageView extends StatelessWidget {
                         'TITEEN',
                         style: TextStyle(
                             fontSize: 12,
-                            color: Color(0xff2121214d),
+                            color: Color(0xff212121),
                             fontFamily: kDeBussyFont),
                       ),
                     ],

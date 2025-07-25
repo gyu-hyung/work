@@ -10,13 +10,11 @@ void main() async {
       clientId: 'rk91kmtpea',
       onAuthFailed: (ex) {
         switch (ex) {
-          case NQuotaExceededException(:final message):
-            print("사용량 초과 (message: $message)");
+          case NQuotaExceededException():
             break;
           case NUnauthorizedClientException() ||
                 NClientUnspecifiedException() ||
                 NAnotherAuthFailedException():
-            print("인증 실패: $ex");
             break;
         }
       });

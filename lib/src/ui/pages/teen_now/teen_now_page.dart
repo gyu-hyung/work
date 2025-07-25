@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:practice01/src/ui/pages/teen_now/bloc/expanded_bloc.dart';
 import 'package:practice01/src/ui/pages/teen_now/teen_now_bottom_sheet_page.dart';
 import 'package:practice01/src/ui/widgets/hiteen_bottom_banner.dart';
 import 'package:practice01/src/ui/widgets/hiteen_bottom_nav_bar.dart';
@@ -14,10 +12,7 @@ class TeenNowPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => EmojiBloc(),
-      child: const TeenNowPageView(),
-    );
+    return const TeenNowPageView();
   }
 }
 
@@ -29,16 +24,13 @@ class TeenNowPageView extends StatefulWidget {
 }
 
 class _TeenNowPageViewState extends State<TeenNowPageView> {
-  late final SlidingUpPanelController panelController;
-  late final ScrollController scrollController;
-  //floating buttons
-  late final ValueNotifier<double> _sheetHeight;
+  final SlidingUpPanelController panelController = SlidingUpPanelController();
+  final ScrollController scrollController = ScrollController();
+  final ValueNotifier<double> _sheetHeight = ValueNotifier(0.0);
 
-  double anchor = 0.28;
+  final double anchor = 0.28;
   double minBound = 0;
   double upperBound = 1.0;
-  //panel
-  bool showFriendDetail = false;
 
   @override
   void dispose() {
@@ -51,15 +43,18 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
   @override
   void initState() {
     super.initState();
-    _sheetHeight = ValueNotifier(0.0);
-    panelController = SlidingUpPanelController();
-    scrollController = ScrollController();
-
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
-          upperBound = 0.6;
           minBound = 0.28;
-          anchor = 0.28;
+          upperBound = 0.6;
         }));
+  }
+
+  void _scrollToTop() {
+    scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
   }
 
   @override
@@ -101,41 +96,8 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
           caption: const NOverlayCaption(text: "서울시청"), // Optional
         );
         controller.addOverlay(marker); // 지도에 마커를 추가
-        print("naver map is ready!");
       },
     );
-    // return Container(
-    //   color: Colors.grey.shade300,
-    //   width: double.infinity,
-    //   height: double.infinity,
-    //   child: Center(
-    //     child: Column(
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       children: [
-    //         Row(
-    //           mainAxisAlignment: MainAxisAlignment.center,
-    //           children: [
-    //             IconButton(
-    //                 onPressed: panelController.collapse,
-    //                 style: IconButton.styleFrom(
-    //                   backgroundColor: Colors.white,
-    //                   shape: const CircleBorder(),
-    //                 ),
-    //                 icon: SvgPicture.asset('assets/icons/ic_float_1.svg')),
-    //             IconButton(
-    //                 onPressed: panelController.hide,
-    //                 style: IconButton.styleFrom(
-    //                   backgroundColor: Colors.white,
-    //                   shape: const CircleBorder(),
-    //                 ),
-    //                 icon: SvgPicture.asset('assets/icons/ic_float_3.svg')),
-    //           ],
-    //         ),
-    //         const Text('여기에 지도 및 캐릭터 UI 구성 예정'),
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 
   Widget _buildFloatingLogo(BuildContext context) {
@@ -160,29 +122,26 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
         return AnimatedPositioned(
           duration: const Duration(milliseconds: 200),
           curve: Curves.easeInOut,
-          bottom: ((value) *
-                  (MediaQuery.of(context).size.height -
-                      (MediaQuery.of(context).size.height / 5))) +
-              16,
+          bottom: ((MediaQuery.of(context).size.height - (MediaQuery.of(context).size.height / 5)) * value) + 16,
           right: 16,
           child: Column(
             children: [
               IconButton(
-                  onPressed: () {},
+                  onPressed: panelController.collapse,
                   style: IconButton.styleFrom(
                     backgroundColor: Colors.white,
                     shape: const CircleBorder(),
                   ),
                   icon: SvgPicture.asset('assets/icons/ic_float_1.svg')),
               IconButton(
-                  onPressed: () {},
+                  onPressed: panelController.hide,
                   style: IconButton.styleFrom(
                     backgroundColor: Colors.white,
                     shape: const CircleBorder(),
                   ),
                   icon: SvgPicture.asset('assets/icons/ic_float_2.svg')),
               IconButton(
-                  onPressed: () {},
+                  onPressed: _scrollToTop,
                   style: IconButton.styleFrom(
                     backgroundColor: Colors.white,
                     shape: const CircleBorder(),
