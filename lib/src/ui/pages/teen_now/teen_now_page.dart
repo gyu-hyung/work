@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:practice01/src/ui/pages/teen_now/cubit/teen_now_cubit.dart';
 import 'package:practice01/src/ui/pages/teen_now/teen_now_bottom_sheet_page.dart';
 import 'package:practice01/src/ui/widgets/hiteen_bottom_banner.dart';
 import 'package:practice01/src/ui/widgets/hiteen_bottom_nav_bar.dart';
@@ -12,7 +15,13 @@ class TeenNowPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const TeenNowPageView();
+    print('TeenNowPage.build');
+    return BlocProvider(
+      create: (_) => TeenNowCubit(
+        authRepository: GetIt.I(),
+      )..onStarted(),
+      child: const TeenNowPageView(),
+    );
   }
 }
 
@@ -122,7 +131,10 @@ class _TeenNowPageViewState extends State<TeenNowPageView> {
         return AnimatedPositioned(
           duration: const Duration(milliseconds: 200),
           curve: Curves.easeInOut,
-          bottom: ((MediaQuery.of(context).size.height - (MediaQuery.of(context).size.height / 5)) * value) + 16,
+          bottom: ((MediaQuery.of(context).size.height -
+                      (MediaQuery.of(context).size.height / 5)) *
+                  value) +
+              16,
           right: 16,
           child: Column(
             children: [

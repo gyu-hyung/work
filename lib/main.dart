@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:get_it/get_it.dart';
+import 'package:practice01/src/data/repositories/auth_repository.dart';
+import 'package:practice01/src/data/repositories/impl/auth_repository_impl.dart';
 import 'app.dart';
 
 void main() async {
@@ -18,6 +21,10 @@ void main() async {
             break;
         }
       });
+
+  final AuthRepository authRepository = AuthRepositoryImpl();
+
+  GetIt.instance.registerSingleton(authRepository);
 
   final navigatorKey = GlobalKey<NavigatorState>();
   runApp(HiteenApp(navigatorKey: navigatorKey));

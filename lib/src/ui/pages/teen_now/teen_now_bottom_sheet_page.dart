@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practice01/constants.dart';
+import 'package:practice01/src/data/models/teen_friend.dart';
+import 'package:practice01/src/ui/pages/teen_now/cubit/teen_now_cubit.dart';
+import 'package:practice01/src/ui/pages/teen_now/cubit/teen_now_state.dart';
 
 class TeenNowBottomSheetPage extends StatelessWidget {
   const TeenNowBottomSheetPage({
@@ -253,21 +257,26 @@ class TeenNowBottomSheetPage extends StatelessWidget {
   }
 
   Widget _buildFriendList() {
-    return ListView.separated(
-      padding: const EdgeInsets.only(bottom: 16),
-      controller: scrollController,
-      physics: const ClampingScrollPhysics(),
-      itemBuilder: (context, index) {
-        return _buildFriendListItem(index + 1);
+    return BlocBuilder<TeenNowCubit, TeenNowState>(
+      builder: (context, state) {
+        final friends = state.friendList;
+        return ListView.separated(
+          padding: const EdgeInsets.only(bottom: 16),
+          controller: scrollController,
+          physics: const ClampingScrollPhysics(),
+          itemBuilder: (context, index) {
+            return _buildFriendListItem(friends[index]);
+          },
+          separatorBuilder: (context, index) {
+            return const Divider(height: 0.5);
+          },
+          itemCount: friends.length,
+        );
       },
-      separatorBuilder: (context, index) {
-        return const Divider(height: 0.5);
-      },
-      itemCount: 10,
     );
   }
 
-  Widget _buildFriendListItem(index) {
+  Widget _buildFriendListItem(TeenNowFriend friend) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(22, 22, 22, 16),
       child: Row(
@@ -285,7 +294,7 @@ class TeenNowBottomSheetPage extends StatelessWidget {
             child: Transform.scale(
               scale: 1.3,
               child: Image.asset(
-                'assets/images/ic_darcy_avartar1.png',
+                friend.profileImageUrl,
                 fit: BoxFit.cover,
                 alignment: Alignment.topCenter,
               ),
@@ -297,23 +306,27 @@ class TeenNowBottomSheetPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '강윤슬(눈물의달력) 🎉 $index',
+                friend.nickname,
                 style: const TextStyle(
-                    fontFamily: kPaperlogyFont, fontWeight: FontWeight.w500),
+                  fontFamily: kPaperlogyFont,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-              const Text(
-                '😍 오늘도 맑음',
-                style: TextStyle(
-                    fontFamily: kPaperlogyFont,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff949494)),
+              Text(
+                friend.mood,
+                style: const TextStyle(
+                  fontFamily: kPaperlogyFont,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xff949494),
+                ),
               ),
-              const Text(
-                '광주 북구 오룡동',
-                style: TextStyle(
-                    fontFamily: kPaperlogyFont,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff949494)),
+              Text(
+                friend.address,
+                style: const TextStyle(
+                  fontFamily: kPaperlogyFont,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xff949494),
+                ),
               ),
             ],
           ),
@@ -337,7 +350,7 @@ class TeenNowBottomSheetPage extends StatelessWidget {
                 fontWeight: FontWeight.w400,
               ),
             ),
-          )
+          ),
         ],
       ),
     );
